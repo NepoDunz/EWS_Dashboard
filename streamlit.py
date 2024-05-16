@@ -1,3 +1,6 @@
+pip install git+https://github.com/geopandas/geopandas.git
+pip install pandas shapely fiona pyproj matplotlib
+
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -5,7 +8,7 @@ import altair as alt
 import numpy as np
 import json
 import requests
-# import geopandas as gpd
+import geopandas as gpd
 # import matplotlib.pyplot as plt
 # import plotly.express as px
 
