@@ -322,25 +322,25 @@ with col[0]:
                         "Overall Risk",
                         format="%f",
                         min_value=0,
-                        max_value=max(df_selected_year_sorted['Overall risk factor']),
+                        max_value=10,
                      ),
                     "Fiscal risk factor": st.column_config.ProgressColumn(
                         "Fiscal Risk",
                         format="%f",
                         min_value=0,
-                        max_value=max(df_selected_year_sorted['Fiscal risk factor']),
+                        max_value=10,
                      ),
                     "Financial risk factor": st.column_config.ProgressColumn(
                         "Financial Risk",
                         format="%f",
                         min_value=0,
-                        max_value=max(df_selected_year_sorted['Financial risk factor']),
+                        max_value=10,
                      ),
                     "External risk factor": st.column_config.ProgressColumn(
                         "External Risk",
                         format="%f",
                         min_value=0,
-                        max_value=max(df_selected_year_sorted['External risk factor']),
+                        max_value=10,
                      )}
                  )
     
