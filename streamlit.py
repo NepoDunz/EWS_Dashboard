@@ -55,6 +55,8 @@ with st.sidebar:
 #         height=350
 #     )
 #     return choropleth
+# Sample data for demonstration
+world = alt.topo_feature('https://vega.github.io/vega-datasets/data/world-110m.json', 'countries')
 
 def make_world_chart(input_df, input_id, input_column, selected_color_theme):
     # Create Altair Chart
