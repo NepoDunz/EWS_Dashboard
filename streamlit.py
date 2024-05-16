@@ -33,14 +33,22 @@ alt.themes.enable("dark")
 # )
 
 # https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
+
 data = {
     'Countries': ['Ghana', 'Senegal', 'India', 'Indonesia', 'Turkiye','Ghana', 'Senegal', 'India', 'Indonesia', 'Turkiye'],
     'country_code': ['GHA', 'SEN', 'IND', 'IDN', 'TUR','GHA', 'SEN', 'IND', 'IDN', 'TUR'],
     'id': [1, 2, 4, 5, 6,1, 2, 4, 5, 6],
     'year': [2024, 2024, 2024, 2024, 2024,2023, 2023, 2023, 2023, 2023],
-    'risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3]
+    'Overall risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3],
+    'Fiscal risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3],
+    'Financial risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3],
+    'External risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3]
 }
 
+# Generate random values for the 'risk factor' column
+data['Fiscal risk factor'] = np.random.uniform(0, 10, size=len(data['Countries']))
+data['Financial risk factor'] = np.random.uniform(0, 10, size=len(data['Countries']))
+data['External risk factor'] = np.random.uniform(0, 10, size=len(data['Countries']))
 df_reshaped = pd.DataFrame(data)
 
 with st.sidebar:
@@ -50,7 +58,7 @@ with st.sidebar:
     
     selected_year = st.selectbox('Select a year', year_list, index=len(year_list)-1)
     df_selected_year = df_reshaped[df_reshaped.year == selected_year]
-    df_selected_year_sorted = df_selected_year.sort_values(by="risk factor", ascending=False)
+    df_selected_year_sorted = df_selected_year.sort_values(by="Overall risk factor", ascending=False)
 
     color_theme_list = ['blues', 'cividis', 'greens', 'inferno', 'magma', 'plasma', 'reds', 'rainbow', 'turbo', 'viridis']
     selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
@@ -59,9 +67,9 @@ with st.sidebar:
 # def make_choropleth(input_df, input_id, input_column, input_color_theme):
 #     choropleth = px.choropleth(input_df, locations=input_id, color=input_column, locationmode="ISO-3",
 #                                color_continuous_scale=input_color_theme,
-#                                range_color=(0, max(df_selected_year['risk factor'])),
+#                                range_color=(0, max(df_selected_year['Overall risk factor'])),
 #                                scope="world",
-#                                labels={'risk factor':'Risk Factor'}
+#                                labels={'Overall risk factor':'Risk Factor'}
 #                               )
 #     choropleth.update_layout(
 #         template='plotly_dark',
@@ -137,8 +145,8 @@ def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
 def calculate_population_difference(input_df, input_year):
   selected_year_data = input_df[input_df['year'] == input_year].reset_index()
   previous_year_data = input_df[input_df['year'] == input_year - 1].reset_index()
-  selected_year_data['risk_difference'] = selected_year_data['risk factor'].sub(previous_year_data['risk factor'], fill_value=0)
-  return pd.concat([selected_year_data.Countries, selected_year_data.id, selected_year_data['risk factor'], selected_year_data.risk_difference], axis=1).sort_values(by="risk_difference", ascending=False)
+  selected_year_data['risk_difference'] = selected_year_data['Overall risk factor'].sub(previous_year_data['Overall risk factor'], fill_value=0)
+  return pd.concat([selected_year_data.Countries, selected_year_data.id, selected_year_data['Overall risk factor'], selected_year_data.risk_difference], axis=1).sort_values(by="risk_difference", ascending=False)
 
 def make_donut(input_response, input_text, input_color):
   if input_color == 'blue':
@@ -199,7 +207,7 @@ with col[2]:
 
     if selected_year > 2010:
         first_country_name = df_risk_difference_sorted.Countries.iloc[0]
-        first_country_risk = (df_risk_difference_sorted['risk factor'].iloc[0])
+        first_country_risk = (df_risk_difference_sorted['Overall risk factor'].iloc[0])
         first_country_delta = round(df_risk_difference_sorted.risk_difference.iloc[0])
     else:
         first_country_name = '-'
@@ -209,7 +217,7 @@ with col[2]:
 
     if selected_year > 2010:
         last_country_name = df_risk_difference_sorted.Countries.iloc[-1]
-        last_country_risk = df_risk_difference_sorted['risk factor'].iloc[-1] 
+        last_country_risk = df_risk_difference_sorted['Overall risk factor'].iloc[-1] 
         last_country_delta = round(df_risk_difference_sorted.risk_difference.iloc[-1])   
     else:
         last_country_name = '-'
@@ -248,13 +256,13 @@ with col[2]:
 with col[1]:
     st.markdown('#### Default risk')
     
-#     choropleth = make_choropleth(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
+#     choropleth = make_choropleth(df_selected_year, 'country_code', 'Overall risk factor', selected_color_theme)
 #     st.plotly_chart(choropleth, use_container_width=True)
 
-    # world_chart = make_world_chart(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
+    # world_chart = make_world_chart(df_selected_year, 'country_code', 'Overall risk factor', selected_color_theme)
     # st.altair_chart(world_chart, use_container_width=True)
     
-    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'risk factor', selected_color_theme)
+    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
     st.altair_chart(heatmap, use_container_width=True)
 
 with st.expander('About', expanded=True):
@@ -265,23 +273,38 @@ with st.expander('About', expanded=True):
             ''')
 
 
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
+
+#     st.dataframe(df_selected_year_sorted,
+#                  column_order=("Countries", "Overall risk factor"),
+#                  hide_index=True,
+#                  width=None,
+#                  column_config={
+#                     "Countries": st.column_config.TextColumn(
+#                         "Countries",
+#                     ),
+#                     "Overall risk factor": st.column_config.ProgressColumn(
+#                         "Risk factor",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=max(df_selected_year_sorted['Overall risk factor']),
+#                      )}
+#                  )
+
+
 with col[0]:
     st.markdown('#### Top Risk Countries')
 
-    st.dataframe(df_selected_year_sorted,
-                 column_order=("Countries", "risk factor"),
-                 hide_index=True,
+    # Reshape the DataFrame to have risk factors as rows
+    df_melted = df_selected_year_sorted.melt(id_vars=["Countries"], 
+                                             value_vars=["Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"],
+                                             var_name="Risk Factor", 
+                                             value_name="Risk Score")
+    
+    # Display the DataFrame
+    st.dataframe(df_melted, 
                  width=None,
-                 column_config={
-                    "Countries": st.column_config.TextColumn(
-                        "Countries",
-                    ),
-                    "risk factor": st.column_config.ProgressColumn(
-                        "Risk factor",
-                        format="%f",
-                        min_value=0,
-                        max_value=max(df_selected_year_sorted['risk factor']),
-                     )}
-                 )
+                 height=None)
     
     
