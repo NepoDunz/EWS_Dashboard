@@ -350,11 +350,10 @@ with col[0]:
     for index, row in df_selected_year_sorted.iterrows():
         st.write(row['Countries'])
         st.write('Overall risk factor:')
-        st.progress(row['Overall risk factor'])
+        st.progress(row['Overall risk factor'] / 10)
         st.write('Fiscal risk factor:')
-        st.progress(row['Fiscal risk factor'])
+        st.progress(row['Fiscal risk factor'] / 10)
         st.write('Financial risk factor:')
-        st.progress(row['Financial risk factor'])
+        st.progress(row['Financial risk factor'] / 10)
         st.write('External risk factor:')
-        st.progress(row['External risk factor'])
-
+        st.progress(row['External risk factor'] / 10)
