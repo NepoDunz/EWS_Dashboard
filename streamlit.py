@@ -335,7 +335,7 @@ with col[0]:
                  )
     st.markdown('#### Overall Country Risk over Time')
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-    st.altair_chart(heatmap, use_container_width=True)
+    st.altair_chart(heatmap, use_container_width=False)
     
 # with col[0]:
 #     st.markdown('#### Top Risk Countries (Year: {})'.format(selected_year))
