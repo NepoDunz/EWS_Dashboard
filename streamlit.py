@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-import plotly.express as px
+# import plotly.express as px
 
 
 st.set_page_config(
@@ -36,21 +36,21 @@ with st.sidebar:
     selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
 
 
-def make_choropleth(input_df, input_id, input_column, input_color_theme):
-    choropleth = px.choropleth(input_df, locations=input_id, color=input_column, locationmode="ISO-3",
-                               color_continuous_scale=input_color_theme,
-                               range_color=(0, max(df_selected_year['risk factor'])),
-                               scope="world",
-                               labels={'risk factor':'Risk Factor'}
-                              )
-    choropleth.update_layout(
-        template='plotly_dark',
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgba(0, 0, 0, 0)',
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=350
-    )
-    return choropleth
+# def make_choropleth(input_df, input_id, input_column, input_color_theme):
+#     choropleth = px.choropleth(input_df, locations=input_id, color=input_column, locationmode="ISO-3",
+#                                color_continuous_scale=input_color_theme,
+#                                range_color=(0, max(df_selected_year['risk factor'])),
+#                                scope="world",
+#                                labels={'risk factor':'Risk Factor'}
+#                               )
+#     choropleth.update_layout(
+#         template='plotly_dark',
+#         plot_bgcolor='rgba(0, 0, 0, 0)',
+#         paper_bgcolor='rgba(0, 0, 0, 0)',
+#         margin=dict(l=0, r=0, t=0, b=0),
+#         height=350
+#     )
+#     return choropleth
 
 def calculate_population_difference(input_df, input_year):
   selected_year_data = input_df[input_df['year'] == input_year].reset_index()
@@ -163,11 +163,11 @@ with col[0]:
         st.altair_chart(donut_chart_less)
 
 
-with col[1]:
-    st.markdown('#### Default risk')
+# with col[1]:
+#     st.markdown('#### Default risk')
     
-    choropleth = make_choropleth(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
-    st.plotly_chart(choropleth, use_container_width=True)
+#     choropleth = make_choropleth(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
+#     st.plotly_chart(choropleth, use_container_width=True)
     
 #     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'risk factor', selected_color_theme)
 #     st.altair_chart(heatmap, use_container_width=True)
