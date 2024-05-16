@@ -239,8 +239,8 @@ with col[1]:
 #     choropleth = make_choropleth(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
 #     st.plotly_chart(choropleth, use_container_width=True)
 
-    world_chart = make_world_chart(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
-    st.altair_chart(world_chart, use_container_width=True)
+    # world_chart = make_world_chart(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
+    # st.altair_chart(world_chart, use_container_width=True)
     
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'risk factor', selected_color_theme)
     st.altair_chart(heatmap, use_container_width=True)
