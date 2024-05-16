@@ -344,36 +344,17 @@ with st.expander('About', expanded=True):
 #                      )}
 #                  )
     
-# with col[0]:
-#     st.markdown('#### Top Risk Countries')
-
-#     for index, row in df_selected_year_sorted.iterrows():
-#         st.write(row['Countries'])
-#         st.write('Overall risk factor:')
-#         st.progress(row['Overall risk factor'] / 10)
-#         st.write('Fiscal risk factor:')
-#         st.progress(row['Fiscal risk factor'] / 10)
-#         st.write('Financial risk factor:')
-#         st.progress(row['Financial risk factor'] / 10)
-#         st.write('External risk factor:')
-#         st.progress(row['External risk factor'] / 10)
-
 with col[0]:
     st.markdown('#### Top Risk Countries')
 
     for index, row in df_selected_year_sorted.iterrows():
         st.write(row['Countries'])
         st.write('Overall risk factor:')
-        st.progress(row['Overall risk factor'] / 10)
-        st.write('<div style="display: flex; justify-content: space-between;">')
-        st.write('<div>Fiscal:</div>')
-        st.write('<div>{}</div>'.format(row['Fiscal risk factor']))
-        st.write('</div>')
-        st.write('<div style="display: flex; justify-content: space-between;">')
-        st.write('<div>Financial:</div>')
-        st.write('<div>{}</div>'.format(row['Financial risk factor']))
-        st.write('</div>')
-        st.write('<div style="display: flex; justify-content: space-between;">')
-        st.write('<div>External:</div>')
-        st.write('<div>{}</div>'.format(row['External risk factor']))
-        st.write('</div>')
+        st.progress(row['Overall risk factor'])
+        st.write('Fiscal risk factor:')
+        st.progress(row['Fiscal risk factor'])
+        st.write('Financial risk factor:')
+        st.progress(row['Financial risk factor'])
+        st.write('External risk factor:')
+        st.progress(row['External risk factor'])
+
