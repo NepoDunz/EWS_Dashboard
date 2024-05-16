@@ -18,7 +18,7 @@ st.set_page_config(
     page_icon="🏂",
     layout="wide",
     initial_sidebar_state="expanded")
-alt.themes.enable("white")
+alt.themes.enable("dark")
 
 # # Add CSS to change the background color
 # st.markdown(
