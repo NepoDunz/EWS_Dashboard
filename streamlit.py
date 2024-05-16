@@ -487,58 +487,74 @@ with st.expander('About', expanded=True):
 #         st.altair_chart(heatmap, use_container_width=True)
 
 
-# Define custom color schemes for each risk factor
-risk_colors = {
-    "Overall risk factor": {"low": "green", "medium": "yellow", "high": "red"},
-    "Fiscal risk factor": {"low": "blue", "medium": "orange", "high": "red"},
-    "Financial risk factor": {"low": "purple", "medium": "yellow", "high": "red"},
-    "External risk factor": {"low": "cyan", "medium": "yellow", "high": "red"}
-}
+# # Define custom color schemes for each risk factor
+# risk_colors = {
+#     "Overall risk factor": {"low": "green", "medium": "yellow", "high": "red"},
+#     "Fiscal risk factor": {"low": "blue", "medium": "orange", "high": "red"},
+#     "Financial risk factor": {"low": "purple", "medium": "yellow", "high": "red"},
+#     "External risk factor": {"low": "cyan", "medium": "yellow", "high": "red"}
+# }
 
-# Function to get color based on value and risk factor
-def get_color(value, risk_factor):
+# # Function to get color based on value and risk factor
+# def get_color(value, risk_factor):
+#     if value <= 3.33:
+#         return risk_colors[risk_factor]["low"]
+#     elif value <= 6.66:
+#         return risk_colors[risk_factor]["medium"]
+#     else:
+#         return risk_colors[risk_factor]["high"]
+
+# with st.markdown('#### Top Risk Countries'):
+#     st.dataframe(df_selected_year_sorted,
+#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+#                  hide_index=True,
+#                  use_container_width=True,
+#                  column_config={
+#                     "Countries": st.column_config.TextColumn(
+#                         "Countries",
+#                     ),
+#                     "Overall risk factor": st.column_config.ProgressColumn(
+#                         "Overall Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                         progress_color=lambda value: get_color(value, "Overall risk factor")
+#                      ),
+#                     "Fiscal risk factor": st.column_config.ProgressColumn(
+#                         "Fiscal Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                         progress_color=lambda value: get_color(value, "Fiscal risk factor")
+#                      ),
+#                     "Financial risk factor": st.column_config.ProgressColumn(
+#                         "Financial Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                         progress_color=lambda value: get_color(value, "Financial risk factor")
+#                      ),
+#                     "External risk factor": st.column_config.ProgressColumn(
+#                         "External Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                         progress_color=lambda value: get_color(value, "External risk factor")
+#                      )}
+#                  )
+# Function to generate CSS based on value
+def get_css_color(value):
     if value <= 3.33:
-        return risk_colors[risk_factor]["low"]
+        return "background-color: green"
     elif value <= 6.66:
-        return risk_colors[risk_factor]["medium"]
+        return "background-color: yellow"
     else:
-        return risk_colors[risk_factor]["high"]
+        return "background-color: red"
+
+# Apply CSS to DataFrame
+styled_df = df_selected_year_sorted.style.applymap(lambda x: get_css_color(x) if isinstance(x, float) else "")
 
 with st.markdown('#### Top Risk Countries'):
-    st.dataframe(df_selected_year_sorted,
-                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-                 hide_index=True,
-                 use_container_width=True,
-                 column_config={
-                    "Countries": st.column_config.TextColumn(
-                        "Countries",
-                    ),
-                    "Overall risk factor": st.column_config.ProgressColumn(
-                        "Overall Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                        progress_color=lambda value: get_color(value, "Overall risk factor")
-                     ),
-                    "Fiscal risk factor": st.column_config.ProgressColumn(
-                        "Fiscal Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                        progress_color=lambda value: get_color(value, "Fiscal risk factor")
-                     ),
-                    "Financial risk factor": st.column_config.ProgressColumn(
-                        "Financial Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                        progress_color=lambda value: get_color(value, "Financial risk factor")
-                     ),
-                    "External risk factor": st.column_config.ProgressColumn(
-                        "External Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                        progress_color=lambda value: get_color(value, "External risk factor")
-                     )}
-                 )
+    st.dataframe(styled_df, 
+                 hide_index=True, 
+                 use_container_width=True)
