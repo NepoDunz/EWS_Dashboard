@@ -117,7 +117,7 @@ with col[0]:
 
     if selected_year > 2010:
         first_country_name = df_risk_difference_sorted.Countries.iloc[0]
-        first_country_risk = df_risk_difference_sorted['risk factor'].iloc[0]
+        first_country_risk = round(df_risk_difference_sorted['risk factor'].iloc[0])
         first_country_delta = df_risk_difference_sorted.risk_difference.iloc[0]
     else:
         first_country_name = '-'
