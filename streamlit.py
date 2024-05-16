@@ -11,6 +11,15 @@ import numpy as np
 # import matplotlib.pyplot as plt
 # import plotly.express as px
 
+
+
+st.set_page_config(
+    page_title="EWS Dashboard",
+    page_icon="🏂",
+    layout="wide",
+    initial_sidebar_state="expanded")
+alt.themes.enable("dark")
+
 # Add CSS to change the background color
 st.markdown(
     """
@@ -22,14 +31,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-st.set_page_config(
-    page_title="EWS Dashboard",
-    page_icon="🏂",
-    layout="wide",
-    initial_sidebar_state="expanded")
-alt.themes.enable("dark")
-
 
 # https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
 data = {
