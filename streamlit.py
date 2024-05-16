@@ -254,7 +254,14 @@ with st.expander('About', expanded=True):
 
 
 with col[0]:
-    st.markdown('#### Top Risk Countries')
+    st.markdown('#### Top Risk Countries'    """
+    <style>
+    body {
+        background-color: #333333;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True)
 
     st.dataframe(df_selected_year_sorted,
                  column_order=("Countries", "risk factor"),
