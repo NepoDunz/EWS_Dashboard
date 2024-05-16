@@ -189,6 +189,13 @@ with col[2]:
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'risk factor', selected_color_theme)
     st.altair_chart(heatmap, use_container_width=True)
 
+with st.expander('About', expanded=True):
+        st.write('''
+            - Data: EWS
+            - :orange[**Changes in country risk**]: difference in overall risk since last update
+            - :orange[**Country risk**]: share of countries with increase/decrease in country risk
+            ''')
+
 
 with col[0]:
     st.markdown('#### Top Risk Countries')
@@ -209,9 +216,4 @@ with col[0]:
                      )}
                  )
     
-    with st.expander('About', expanded=True):
-        st.write('''
-            - Data: EWS
-            - :orange[**Changes in country risk**]: difference in overall risk since last update
-            - :orange[**Country risk**]: share of countries with increase/decrease in country risk
-            ''')
+    
