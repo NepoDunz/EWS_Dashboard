@@ -296,45 +296,45 @@ with st.expander('About', expanded=True):
 #                  width=None,
 #                  height=None)
 
-# with col[0]:
-#     st.markdown('#### Top Risk Countries')
+with col[0]:
+    st.markdown('#### Top Risk Countries')
 
-#     st.dataframe(df_selected_year_sorted,
-#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-#                  hide_index=True,
-#                  use_container_width=True,
-#                  column_config={
-#                     "Countries": st.column_config.TextColumn(
-#                         "Countries",
-#                     ),
-#                     "Overall risk factor": st.column_config.ProgressColumn(
-#                         "Overall Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Fiscal risk factor": st.column_config.ProgressColumn(
-#                         "Fiscal Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Financial risk factor": st.column_config.ProgressColumn(
-#                         "Financial Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "External risk factor": st.column_config.ProgressColumn(
-#                         "External Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      )}
-#                  )
-#     st.markdown('#### Overall Country Risk over Time')
-#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-#     st.altair_chart(heatmap, use_container_width=True)
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+                 hide_index=True,
+                 use_container_width=True,
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     )}
+                 )
+    st.markdown('#### Overall Country Risk over Time')
+    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+    st.altair_chart(heatmap, use_container_width=True)
     
 # with col[0]:
 #     st.markdown('#### Top Risk Countries (Year: {})'.format(selected_year))
@@ -444,31 +444,31 @@ with st.expander('About', expanded=True):
 #     st.altair_chart(heatmap, use_container_width=True)
 
 
-def progress_column(val):
-    if val <= 3:
-        color = 'green'
-    else:
-        color = 'red'
-    return f'<div style="background-color: {color}; width: {val*10}%; height: 100%">{val}</div>'
+# def progress_column(val):
+#     if val <= 3:
+#         color = 'green'
+#     else:
+#         color = 'red'
+#     return f'<div style="background-color: {color}; width: {val*10}%; height: 100%">{val}</div>'
 
-def format_dataframe(df):
-    for column in df.columns[1:]:  # Skip the 'Countries' column
-        df[column] = df[column].apply(progress_column)
-    return df
+# def format_dataframe(df):
+#     for column in df.columns[1:]:  # Skip the 'Countries' column
+#         df[column] = df[column].apply(progress_column)
+#     return df
 
-formatted_df = format_dataframe(df_selected_year_sorted)
+# formatted_df = format_dataframe(df_selected_year_sorted)
 
-def render_html_table(df):
-    html = df.to_html(escape=False, index=False)
-    return html
+# def render_html_table(df):
+#     html = df.to_html(escape=False, index=False)
+#     return html
 
-# Render the HTML table in Streamlit
-html_table = render_html_table(formatted_df)
+# # Render the HTML table in Streamlit
+# html_table = render_html_table(formatted_df)
 
-with col[0]:
-    st.markdown('#### Top Risk Countries')
-    st.markdown(html_table, unsafe_allow_html=True)
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
+#     st.markdown(html_table, unsafe_allow_html=True)
     
-    st.markdown('#### Overall Country Risk over Time')
-    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-    st.altair_chart(heatmap, use_container_width=True)
+#     st.markdown('#### Overall Country Risk over Time')
+#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+#     st.altair_chart(heatmap, use_container_width=True)
