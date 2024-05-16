@@ -3,6 +3,8 @@ import pandas as pd
 import altair as alt
 # from mpl_toolkits.basemap import Basemap
 import numpy as np
+import json
+import requests
 # import geopandas as gpd
 # import matplotlib.pyplot as plt
 # import plotly.express as px
@@ -56,27 +58,50 @@ with st.sidebar:
 #     )
 #     return choropleth
 # Sample data for demonstration
-world = alt.topo_feature('https://vega.github.io/vega-datasets/data/world-110m.json', 'countries')
+# world = alt.topo_feature('https://vega.github.io/vega-datasets/data/world-110m.json', 'countries')
+
+# def make_world_chart(input_df, input_id, input_column, selected_color_theme):
+#     # Create Altair Chart
+#     chart = alt.Chart(world).mark_geoshape(
+#         fill='lightgray',
+#         stroke='white'
+#     ).transform_lookup(
+#         lookup='id',
+#         from_=alt.LookupData(input_df, input_id, [input_column])
+#     ).encode(
+#         color=alt.Color(input_column, scale=alt.Scale(scheme=selected_color_theme))
+#     ).properties(
+#         width=700,
+#         height=400
+#     ).project(
+#         'equirectangular'
+#     )
+
+#     return chart
 
 def make_world_chart(input_df, input_id, input_column, selected_color_theme):
-    # Create Altair Chart
-    chart = alt.Chart(world).mark_geoshape(
+    # Load GeoJSON data from URL
+    url = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson'
+    geojson_data = json.loads(requests.get(url).text)
+
+    # Convert GeoJSON to DataFrame
+    geojson_df = pd.json_normalize(geojson_data['features'])
+
+    # Merge the input DataFrame with the GeoDataFrame
+    merged = pd.merge(geojson_df, input_df, left_on='properties.iso_a3', right_on=input_id, how='left')
+
+    # Create an Altair chart
+    chart = alt.Chart(alt.Data(values=merged)).mark_geoshape(
         fill='lightgray',
         stroke='white'
-    ).transform_lookup(
-        lookup='id',
-        from_=alt.LookupData(input_df, input_id, [input_column])
     ).encode(
         color=alt.Color(input_column, scale=alt.Scale(scheme=selected_color_theme))
     ).properties(
         width=700,
         height=400
-    ).project(
-        'equirectangular'
-    )
+    ).project('naturalEarth1')
 
     return chart
-
 
 def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
     heatmap = alt.Chart(input_df).mark_rect().encode(
