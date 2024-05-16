@@ -11,6 +11,17 @@ import numpy as np
 # import matplotlib.pyplot as plt
 # import plotly.express as px
 
+# Add CSS to change the background color
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #333333;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.set_page_config(
     page_title="EWS Dashboard",
