@@ -197,10 +197,10 @@ def format_number(num):
         return f'{round(num / 1000000, 1)} M'
     return f'{num // 1000} K'
 
-col = st.columns((2.5, 4, 3), gap='medium')
+col = st.columns((9, 3), gap='medium')
 
 
-with col[2]:
+with col[1]:
     st.markdown('#### Changes in country risk')
 
     df_risk_difference_sorted = calculate_population_difference(df_reshaped, selected_year)
@@ -253,17 +253,17 @@ with col[2]:
         st.altair_chart(donut_chart_less)
 
 
-with col[1]:
-    st.markdown('#### Default risk')
+# with col[1]:
+#     st.markdown('#### Default risk')
     
-#     choropleth = make_choropleth(df_selected_year, 'country_code', 'Overall risk factor', selected_color_theme)
-#     st.plotly_chart(choropleth, use_container_width=True)
+# #     choropleth = make_choropleth(df_selected_year, 'country_code', 'Overall risk factor', selected_color_theme)
+# #     st.plotly_chart(choropleth, use_container_width=True)
 
-    # world_chart = make_world_chart(df_selected_year, 'country_code', 'Overall risk factor', selected_color_theme)
-    # st.altair_chart(world_chart, use_container_width=True)
+#     # world_chart = make_world_chart(df_selected_year, 'country_code', 'Overall risk factor', selected_color_theme)
+#     # st.altair_chart(world_chart, use_container_width=True)
     
-    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-    st.altair_chart(heatmap, use_container_width=True)
+#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+#     st.altair_chart(heatmap, use_container_width=True)
 
 with st.expander('About', expanded=True):
         st.write('''
@@ -343,6 +343,10 @@ with col[0]:
                         max_value=10,
                      )}
                  )
+
+    st.markdown('#### Overall Country Risk over Time')
+    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+    st.altair_chart(heatmap, use_container_width=True)
     
 # with col[0]:
 #     st.markdown('#### Top Risk Countries')
