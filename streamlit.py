@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-import geopandas as gpd
+import folium
+# import geopandas as gpd
 import matplotlib.pyplot as plt
 # import plotly.express as px
 
