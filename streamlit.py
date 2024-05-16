@@ -52,6 +52,30 @@ with st.sidebar:
 #     )
 #     return choropleth
 
+def make_world_chart(input_df, input_id, input_column, selected_color_theme):
+    # Load a GeoDataFrame containing the geometries of the regions to be plotted
+    world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+    # Merge the input DataFrame with the GeoDataFrame
+    merged = world.merge(input_df, left_on='iso_a3', right_on=input_id)
+    
+    # Plot the choropleth map
+    fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+    merged.plot(column=input_column, cmap=selected_color_theme, linewidth=0.8, ax=ax, edgecolor='0.8')
+
+    # Customize the appearance of the map
+    ax.axis('off')
+    fig.patch.set_facecolor('black')
+    ax.set_facecolor('black')
+    ax.set_title('Risk Factor', fontdict={'fontsize': 25, 'fontweight': 'bold'})
+
+    # Create colorbar as a legend
+    sm = plt.cm.ScalarMappable(cmap=selected_color_theme, norm=plt.Normalize(vmin=0, vmax=max(input_df[input_column])))
+    sm._A = []
+    cbar = fig.colorbar(sm)
+
+    return fig
+
+
 def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
     heatmap = alt.Chart(input_df).mark_rect().encode(
             y=alt.Y(f'{input_y}:O', axis=alt.Axis(title="Year", titleFontSize=18, titlePadding=15, titleFontWeight=900, labelAngle=0)),
@@ -185,6 +209,9 @@ with col[1]:
     
 #     choropleth = make_choropleth(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
 #     st.plotly_chart(choropleth, use_container_width=True)
+
+    world_chart = make_world_chart(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
+    st.pyplot(world_chart, use_container_width=True)
     
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'risk factor', selected_color_theme)
     st.altair_chart(heatmap, use_container_width=True)
