@@ -350,45 +350,25 @@ with col[0]:
     for index, row in df_selected_year_sorted.iterrows():
         st.write(row['Countries'])
         st.write('Overall risk factor:')
-        if row['Overall risk factor'] < 3:
-            foreground = 'green'
-        elif 3 <= row['Overall risk factor'] <= 7:
-            foreground = 'yellow'
-        else:
-            foreground = 'red'
-        st.progress(row['Overall risk factor'] / 10, foreground_color=foreground)
+        overall_style = f'background-color: {"red" if row["Overall risk factor"] > 7 else "yellow" if 3 <= row["Overall risk factor"] <= 7 else "green"}'
+        st.write(f'<div style="width: 100%; height: 25px; border-radius: 5px; overflow: hidden;"><div style="{overall_style}; width: {row["Overall risk factor"] * 10}%; height: 100%;"></div></div>', unsafe_allow_html=True)
         
         st.write('<div style="display: flex; justify-content: space-between;">')
         st.write('<div>Fiscal:</div>')
-        if row['Fiscal risk factor'] < 3:
-            fiscal_foreground = 'green'
-        elif 3 <= row['Fiscal risk factor'] <= 7:
-            fiscal_foreground = 'yellow'
-        else:
-            fiscal_foreground = 'red'
-        st.write('<div style="color:{};">{}</div>'.format(fiscal_foreground, row['Fiscal risk factor']))
+        fiscal_style = f'color: {"red" if row["Fiscal risk factor"] > 7 else "yellow" if 3 <= row["Fiscal risk factor"] <= 7 else "green"}'
+        st.write(f'<div style="{fiscal_style};">{row["Fiscal risk factor"]}</div>')
         st.write('</div>')
         
         st.write('<div style="display: flex; justify-content: space-between;">')
         st.write('<div>Financial:</div>')
-        if row['Financial risk factor'] < 3:
-            financial_foreground = 'green'
-        elif 3 <= row['Financial risk factor'] <= 7:
-            financial_foreground = 'yellow'
-        else:
-            financial_foreground = 'red'
-        st.write('<div style="color:{};">{}</div>'.format(financial_foreground, row['Financial risk factor']))
+        financial_style = f'color: {"red" if row["Financial risk factor"] > 7 else "yellow" if 3 <= row["Financial risk factor"] <= 7 else "green"}'
+        st.write(f'<div style="{financial_style};">{row["Financial risk factor"]}</div>')
         st.write('</div>')
         
         st.write('<div style="display: flex; justify-content: space-between;">')
         st.write('<div>External:</div>')
-        if row['External risk factor'] < 3:
-            external_foreground = 'green'
-        elif 3 <= row['External risk factor'] <= 7:
-            external_foreground = 'yellow'
-        else:
-            external_foreground = 'red'
-        st.write('<div style="color:{};">{}</div>'.format(external_foreground, row['External risk factor']))
+        external_style = f'color: {"red" if row["External risk factor"] > 7 else "yellow" if 3 <= row["External risk factor"] <= 7 else "green"}'
+        st.write(f'<div style="{external_style};">{row["External risk factor"]}</div>')
         st.write('</div>')
 
     st.markdown('#### Overall Country Risk over Time')
