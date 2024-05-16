@@ -446,7 +446,7 @@ def create_progress_bar_html(value):
     color = 'green' if value <= 3 else 'red'
     percentage = (value / 10) * 100  # Scale the value to a percentage of 10
     return f'''
-        <div style="position: relative; width: 100%; background-color: lightgray; border-radius: 5px; height: 20px;">
+        <div style="width: 100%; background-color: lightgray; border-radius: 5px; height: 20px; position: relative;">
             <div style="width: {percentage}%; background-color: {color}; height: 100%; border-radius: 5px;">
                 <span style="position: absolute; right: 5px; top: 0; bottom: 0; margin: auto; color: white; font-weight: bold; line-height: 20px;">{value}</span>
             </div>
