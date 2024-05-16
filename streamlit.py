@@ -409,20 +409,16 @@ with st.expander('About', expanded=True):
 #         st.progress(row['External risk factor'] / 10)
 
 
-def progress_html(value, min_value=0, max_value=10):
-    percentage = (value - min_value) / (max_value - min_value) * 100
-    color = 'green' if value <= 3 else 'red'
-    return f'''
-        <div style="background-color: lightgrey; width: 100%; border-radius: 5px;">
-            <div style="background-color: {color}; width: {percentage}%; height: 100%; border-radius: 5px; text-align: right; padding-right: 5px; color: white;">
-                {value}
-            </div>
-        </div>
-    '''
+def progress_column(val):
+    if val <= 3:
+        color = 'green'
+    else:
+        color = 'red'
+    return f'<div style="background-color: {color}; width: {val*10}%; height: 100%">{val}</div>'
 
 def format_dataframe(df):
     for column in df.columns[1:]:  # Skip the 'Countries' column
-        df[column] = df[column].apply(lambda x: progress_html(x))
+        df[column] = df[column].apply(progress_column)
     return df
 
 formatted_df = format_dataframe(df_selected_year_sorted)
@@ -441,4 +437,3 @@ with col[0]:
     st.markdown('#### Overall Country Risk over Time')
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
     st.altair_chart(heatmap, use_container_width=True)
-
