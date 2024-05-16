@@ -409,33 +409,78 @@ with st.expander('About', expanded=True):
 #         st.progress(row['External risk factor'] / 10)
 
 
-def color_risk(val):
-    color = 'green' if val <= 3 else 'red'
-    return f'background-color: {color}'
+# def color_risk(val):
+#     color = 'green' if val <= 3 else 'red'
+#     return f'background-color: {color}'
 
-def format_risk_column(df, column_name):
-    return df[column_name].apply(lambda x: f'<div style="background-color:{"green" if x <= 3 else "red"}; width: 100%; height: 100%">{x}</div>')
+# def format_risk_column(df, column_name):
+#     return df[column_name].apply(lambda x: f'<div style="background-color:{"green" if x <= 3 else "red"}; width: 100%; height: 100%">{x}</div>')
 
-# # Sample dataframe
-# df_selected_year_sorted = pd.DataFrame({
-#     'Countries': ['Country A', 'Country B', 'Country C'],
-#     'Overall risk factor': [2.5, 4.2, 3.8],
-#     'Fiscal risk factor': [1.0, 5.5, 2.3],
-#     'Financial risk factor': [3.1, 6.0, 2.8],
-#     'External risk factor': [2.7, 3.4, 4.9]
-# })
+# # # Sample dataframe
+# # df_selected_year_sorted = pd.DataFrame({
+# #     'Countries': ['Country A', 'Country B', 'Country C'],
+# #     'Overall risk factor': [2.5, 4.2, 3.8],
+# #     'Fiscal risk factor': [1.0, 5.5, 2.3],
+# #     'Financial risk factor': [3.1, 6.0, 2.8],
+# #     'External risk factor': [2.7, 3.4, 4.9]
+# # })
 
-# Apply the custom formatting
-for column in ['Overall risk factor', 'Fiscal risk factor', 'Financial risk factor', 'External risk factor']:
-    df_selected_year_sorted[column] = format_risk_column(df_selected_year_sorted, column)
+# # Apply the custom formatting
+# for column in ['Overall risk factor', 'Fiscal risk factor', 'Financial risk factor', 'External risk factor']:
+#     df_selected_year_sorted[column] = format_risk_column(df_selected_year_sorted, column)
 
-# Convert dataframe to HTML
-html_table = df_selected_year_sorted.to_html(escape=False, index=False)
+# # Convert dataframe to HTML
+# html_table = df_selected_year_sorted.to_html(escape=False, index=False)
 
-with col[0]:
-    st.markdown('#### Top Risk Countries')
-    st.markdown(html_table, unsafe_allow_html=True)
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
+#     st.markdown(html_table, unsafe_allow_html=True)
     
-    st.markdown('#### Overall Country Risk over Time')
-    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-    st.altair_chart(heatmap, use_container_width=True)
+#     st.markdown('#### Overall Country Risk over Time')
+#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+#     st.altair_chart(heatmap, use_container_width=True)
+
+# Sample dataframe
+df_selected_year_sorted = pd.DataFrame({
+    'Countries': ['Country A', 'Country B', 'Country C'],
+    'Overall risk factor': [2.5, 4.2, 3.8],
+    'Fiscal risk factor': [1.0, 5.5, 2.3],
+    'Financial risk factor': [3.1, 6.0, 2.8],
+    'External risk factor': [2.7, 3.4, 4.9]
+})
+
+# Function to create HTML progress bars with color thresholds
+def create_progress_bar_html(value):
+    color = 'green' if value <= 3 else 'red'
+    percentage = (value / 10) * 100
+    return f'''
+        <div style="width: 100%; background-color: lightgray; border-radius: 5px;">
+            <div style="width: {percentage}%; background-color: {color}; padding: 5px; border-radius: 5px; color: white; text-align: right;">
+                {value}
+            </div>
+        </div>
+    '''
+
+# Apply the progress bar function to the relevant columns
+df_selected_year_sorted['Overall risk factor'] = df_selected_year_sorted['Overall risk factor'].apply(create_progress_bar_html)
+df_selected_year_sorted['Fiscal risk factor'] = df_selected_year_sorted['Fiscal risk factor'].apply(create_progress_bar_html)
+df_selected_year_sorted['Financial risk factor'] = df_selected_year_sorted['Financial risk factor'].apply(create_progress_bar_html)
+df_selected_year_sorted['External risk factor'] = df_selected_year_sorted['External risk factor'].apply(create_progress_bar_html)
+
+# Function to convert dataframe to HTML
+def dataframe_to_html(df):
+    return df.to_html(escape=False, index=False)
+
+# Generate HTML table
+html_table = dataframe_to_html(df_selected_year_sorted)
+
+with st.container():
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.markdown('#### Top Risk Countries')
+        st.markdown(html_table, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('#### Overall Country Risk over Time')
+        heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+        st.altair_chart(heatmap, use_container_width=True)
