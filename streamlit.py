@@ -559,21 +559,22 @@ with st.expander('About', expanded=True):
 #                  hide_index=True, 
 #                  use_container_width=True)
 
-# Function to generate CSS based on value
-def get_css_color(value):
-    if value <= 3.33:
-        return "background-color: green"
-    elif value <= 6.66:
-        return "background-color: yellow"
-    else:
-        return "background-color: red"
 
 # Function to convert numeric values to progress bars
 def value_to_progress_bar(value):
-    return f'<div style="background-color: lightgray; width: 100%; border-radius: 5px;"><div style="height: 100%; width: {value * 10}%; background-color: green; border-radius: 5px;"></div></div>'
+    max_value = 10  # Assuming maximum value is 10
+    progress = int((value / max_value) * 100)
+    return f'<div style="background-color: lightgray; width: 100px; border-radius: 5px;"><div style="height: 20px; width: {progress}%; background-color: green; border-radius: 5px;"></div></div>'
 
-# Apply CSS and convert numeric values to progress bars
-styled_df = df_selected_year_sorted.style.applymap(lambda x: get_css_color(x) if isinstance(x, float) else "").format({col: value_to_progress_bar for col in df_selected_year_sorted.columns if col != "Countries"})
+# Process DataFrame to replace numeric values with progress bars
+progress_df = df_selected_year_sorted.copy()
+for col in progress_df.columns:
+    if col != "Countries":
+        progress_df[col] = progress_df[col].apply(value_to_progress_bar)
 
+# Display the processed DataFrame
 with st.markdown('#### Top Risk Countries'):
-    st.write(styled_df, unsafe_allow_html=True)
+    st.dataframe(progress_df, 
+                 index=False,
+                 escape_html=False,  # To render HTML
+                 unsafe_allow_html=True)  # To allow HTML rendering
