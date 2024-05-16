@@ -27,11 +27,11 @@ data = {
     'Countries': ['Ghana', 'Senegal', 'India', 'Indonesia', 'Turkiye','Ghana', 'Senegal', 'India', 'Indonesia', 'Turkiye'],
     'country_code': ['GHA', 'SEN', 'IND', 'IDN', 'TUR','GHA', 'SEN', 'IND', 'IDN', 'TUR'],
     'id': [1, 2, 4, 5, 6,1, 2, 4, 5, 6],
-    'year': [2024, 2024, 2024, 2024, 2024,2023, 2023, 2023, 2023, 2023,2022, 2022, 2022, 2022, 2022],
-    'Overall risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3,3.3, 9.2, 3.4, 5.4, 2.3],
-    'Fiscal risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3, 6.3, 5.2, 6.4, 3.4, 6.3],
-    'Financial risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3,6.3, 5.2, 6.4, 3.4, 6.3],
-    'External risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3,6.3, 5.2, 6.4, 3.4, 6.3]
+    'year': [2024, 2024, 2024, 2024, 2024,2023, 2023, 2023, 2023, 2023],
+    'Overall risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3],
+    'Fiscal risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3],
+    'Financial risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3],
+    'External risk factor': [7.3, 9.2, 2.4, 5.4, 8.3,6.3, 5.2, 6.4, 3.4, 6.3]
 }
 
 # Generate random values for the 'risk factor' column
