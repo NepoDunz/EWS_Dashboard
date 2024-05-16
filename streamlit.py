@@ -420,20 +420,50 @@ with st.expander('About', expanded=True):
 #                     {'background': color})
 
 
-def color_risk(val):
-    color = 'green' if val <= 3 else 'red'
-    return f'background-color: {color}'
+# def color_risk(val):
+#     color = 'green' if val <= 3 else 'red'
+#     return f'background-color: {color}'
 
-def format_risk_column(df, column_name):
-    return df[column_name].apply(lambda x: f'<div style="background-color:{"green" if x <= 3 else "red"}; width: 100%; height: 100%">{x}</div>')
+# def format_risk_column(df, column_name):
+#     return df[column_name].apply(lambda x: f'<div style="background-color:{"green" if x <= 3 else "red"}; width: 100%; height: 100%">{x}</div>')
 
 
-# Apply the custom formatting
-for column in ['Overall risk factor', 'Fiscal risk factor', 'Financial risk factor', 'External risk factor']:
-    df_selected_year_sorted[column] = format_risk_column(df_selected_year_sorted, column)
+# # Apply the custom formatting
+# for column in ['Overall risk factor', 'Fiscal risk factor', 'Financial risk factor', 'External risk factor']:
+#     df_selected_year_sorted[column] = format_risk_column(df_selected_year_sorted, column)
 
-# Convert dataframe to HTML
-html_table = df_selected_year_sorted.to_html(escape=False, index=False)
+# # Convert dataframe to HTML
+# html_table = df_selected_year_sorted.to_html(escape=False, index=False)
+
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
+#     st.markdown(html_table, unsafe_allow_html=True)
+    
+#     st.markdown('#### Overall Country Risk over Time')
+#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+#     st.altair_chart(heatmap, use_container_width=True)
+
+
+def progress_column(val):
+    if val <= 3:
+        color = 'green'
+    else:
+        color = 'red'
+    return f'<div style="background-color: {color}; width: {val*10}%; height: 100%">{val}</div>'
+
+def format_dataframe(df):
+    for column in df.columns[1:]:  # Skip the 'Countries' column
+        df[column] = df[column].apply(progress_column)
+    return df
+
+formatted_df = format_dataframe(df_selected_year_sorted)
+
+def render_html_table(df):
+    html = df.to_html(escape=False, index=False)
+    return html
+
+# Render the HTML table in Streamlit
+html_table = render_html_table(formatted_df)
 
 with col[0]:
     st.markdown('#### Top Risk Countries')
