@@ -177,7 +177,7 @@ def format_number(num):
         return f'{round(num / 1000000, 1)} M'
     return f'{num // 1000} K'
 
-col = st.columns((2.5, 2, 3), gap='medium')
+col = st.columns((2.5, 4, 3), gap='medium')
 
 
 with col[2]:
