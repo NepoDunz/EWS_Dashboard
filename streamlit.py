@@ -57,27 +57,23 @@ with st.sidebar:
 #     return choropleth
 
 def make_world_chart(input_df, input_id, input_column, selected_color_theme):
-    # Load a GeoDataFrame containing the geometries of the regions to be plotted
-    world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-    # Merge the input DataFrame with the GeoDataFrame
-    merged = world.merge(input_df, left_on='iso_a3', right_on=input_id)
-    
-    # Plot the choropleth map
-    fig, ax = plt.subplots(1, 1, figsize=(10, 6))
-    merged.plot(column=input_column, cmap=selected_color_theme, linewidth=0.8, ax=ax, edgecolor='0.8')
+    # Create Altair Chart
+    chart = alt.Chart(world).mark_geoshape(
+        fill='lightgray',
+        stroke='white'
+    ).transform_lookup(
+        lookup='id',
+        from_=alt.LookupData(input_df, input_id, [input_column])
+    ).encode(
+        color=alt.Color(input_column, scale=alt.Scale(scheme=selected_color_theme))
+    ).properties(
+        width=700,
+        height=400
+    ).project(
+        'equirectangular'
+    )
 
-    # Customize the appearance of the map
-    ax.axis('off')
-    fig.patch.set_facecolor('black')
-    ax.set_facecolor('black')
-    ax.set_title('Risk Factor', fontdict={'fontsize': 25, 'fontweight': 'bold'})
-
-    # Create colorbar as a legend
-    sm = plt.cm.ScalarMappable(cmap=selected_color_theme, norm=plt.Normalize(vmin=0, vmax=max(input_df[input_column])))
-    sm._A = []
-    cbar = fig.colorbar(sm)
-
-    return fig
+    return chart
 
 
 def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
