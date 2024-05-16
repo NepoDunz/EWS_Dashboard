@@ -344,7 +344,7 @@ with st.expander('About', expanded=True):
 #                      )}
 #                  )
 
-    with col[0]:
+with col[0]:
     st.markdown('#### Top Risk Countries')
 
     for index, row in df_selected_year_sorted.iterrows():
