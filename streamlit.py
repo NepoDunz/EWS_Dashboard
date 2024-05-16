@@ -20,17 +20,6 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 alt.themes.enable("dark")
 
-# # Add CSS to change the background color
-# st.markdown(
-#     """
-#     <style>
-#     body {
-#         background-color: #333333;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 
 # https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
 
