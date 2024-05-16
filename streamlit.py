@@ -487,9 +487,24 @@ with st.expander('About', expanded=True):
 #         st.altair_chart(heatmap, use_container_width=True)
 
 
-with col[0]:
-    st.markdown('#### Top Risk Countries')
-    
+# Define custom color schemes for each risk factor
+risk_colors = {
+    "Overall risk factor": {"low": "green", "medium": "yellow", "high": "red"},
+    "Fiscal risk factor": {"low": "blue", "medium": "orange", "high": "red"},
+    "Financial risk factor": {"low": "purple", "medium": "yellow", "high": "red"},
+    "External risk factor": {"low": "cyan", "medium": "yellow", "high": "red"}
+}
+
+# Function to get color based on value and risk factor
+def get_color(value, risk_factor):
+    if value <= 3.33:
+        return risk_colors[risk_factor]["low"]
+    elif value <= 6.66:
+        return risk_colors[risk_factor]["medium"]
+    else:
+        return risk_colors[risk_factor]["high"]
+
+with st.markdown('#### Top Risk Countries'):
     st.dataframe(df_selected_year_sorted,
                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
                  hide_index=True,
@@ -503,23 +518,27 @@ with col[0]:
                         format="%f",
                         min_value=0,
                         max_value=10,
+                        progress_color=lambda value: get_color(value, "Overall risk factor")
                      ),
                     "Fiscal risk factor": st.column_config.ProgressColumn(
                         "Fiscal Risk",
                         format="%f",
                         min_value=0,
                         max_value=10,
+                        progress_color=lambda value: get_color(value, "Fiscal risk factor")
                      ),
                     "Financial risk factor": st.column_config.ProgressColumn(
                         "Financial Risk",
                         format="%f",
                         min_value=0,
                         max_value=10,
+                        progress_color=lambda value: get_color(value, "Financial risk factor")
                      ),
                     "External risk factor": st.column_config.ProgressColumn(
                         "External Risk",
                         format="%f",
                         min_value=0,
                         max_value=10,
+                        progress_color=lambda value: get_color(value, "External risk factor")
                      )}
                  )
