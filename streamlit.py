@@ -81,29 +81,29 @@ with st.sidebar:
 
 #     return chart
 
-def make_world_chart(input_df, input_id, input_column, selected_color_theme):
-    # Load GeoJSON data from URL
-    url = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson'
-    geojson_data = json.loads(requests.get(url).text)
+# def make_world_chart(input_df, input_id, input_column, selected_color_theme):
+#     # Load GeoJSON data from URL
+#     url = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson'
+#     geojson_data = json.loads(requests.get(url).text)
 
-    # Convert GeoJSON to DataFrame
-    geojson_df = pd.json_normalize(geojson_data['features'])
+#     # Convert GeoJSON to DataFrame
+#     geojson_df = pd.json_normalize(geojson_data['features'])
 
-    # Merge the input DataFrame with the GeoDataFrame
-    merged = pd.merge(geojson_df, input_df, left_on='properties.iso_a3', right_on=input_id, how='left')
+#     # Merge the input DataFrame with the GeoDataFrame
+#     merged = pd.merge(geojson_df, input_df, left_on='properties.iso_a3', right_on=input_id, how='left')
 
-    # Create an Altair chart
-    chart = alt.Chart(alt.Data(values=merged)).mark_geoshape(
-        fill='lightgray',
-        stroke='white'
-    ).encode(
-        color=alt.Color(input_column, scale=alt.Scale(scheme=selected_color_theme))
-    ).properties(
-        width=700,
-        height=400
-    ).project('naturalEarth1')
+#     # Create an Altair chart
+#     chart = alt.Chart(alt.Data(values=merged)).mark_geoshape(
+#         fill='lightgray',
+#         stroke='white'
+#     ).encode(
+#         color=alt.Color(input_column, scale=alt.Scale(scheme=selected_color_theme))
+#     ).properties(
+#         width=700,
+#         height=400
+#     ).project('naturalEarth1')
 
-    return chart
+#     return chart
 
 def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
     heatmap = alt.Chart(input_df).mark_rect().encode(
