@@ -296,10 +296,10 @@ with st.expander('About', expanded=True):
 #                  width=None,
 #                  height=None)
 
-st.column_config.LineChartColumn("Trend", color="green")
+
 with col[0]:
     st.markdown('#### Top Risk Countries')
-
+    st.column_config.LineChartColumn("Trend", color="green")
     st.dataframe(df_selected_year_sorted,
                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
                  hide_index=True,
