@@ -17,8 +17,8 @@ st.set_page_config(
     page_icon="🏂",
     layout="wide",
     initial_sidebar_state="expanded")
-
 alt.themes.enable("dark")
+
 
 # https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
 data = {
