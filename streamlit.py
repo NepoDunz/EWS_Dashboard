@@ -416,14 +416,14 @@ def color_risk(val):
 def format_risk_column(df, column_name):
     return df[column_name].apply(lambda x: f'<div style="background-color:{"green" if x <= 3 else "red"}; width: 100%; height: 100%">{x}</div>')
 
-# Sample dataframe
-df_selected_year_sorted = pd.DataFrame({
-    'Countries': ['Country A', 'Country B', 'Country C'],
-    'Overall risk factor': [2.5, 4.2, 3.8],
-    'Fiscal risk factor': [1.0, 5.5, 2.3],
-    'Financial risk factor': [3.1, 6.0, 2.8],
-    'External risk factor': [2.7, 3.4, 4.9]
-})
+# # Sample dataframe
+# df_selected_year_sorted = pd.DataFrame({
+#     'Countries': ['Country A', 'Country B', 'Country C'],
+#     'Overall risk factor': [2.5, 4.2, 3.8],
+#     'Fiscal risk factor': [1.0, 5.5, 2.3],
+#     'Financial risk factor': [3.1, 6.0, 2.8],
+#     'External risk factor': [2.7, 3.4, 4.9]
+# })
 
 # Apply the custom formatting
 for column in ['Overall risk factor', 'Fiscal risk factor', 'Financial risk factor', 'External risk factor']:
