@@ -542,6 +542,23 @@ with st.expander('About', expanded=True):
 #                         progress_color=lambda value: get_color(value, "External risk factor")
 #                      )}
 #                  )
+# # Function to generate CSS based on value
+# def get_css_color(value):
+#     if value <= 3.33:
+#         return "background-color: green"
+#     elif value <= 6.66:
+#         return "background-color: yellow"
+#     else:
+#         return "background-color: red"
+
+# # Apply CSS to DataFrame
+# styled_df = df_selected_year_sorted.style.applymap(lambda x: get_css_color(x) if isinstance(x, float) else "")
+
+# with st.markdown('#### Top Risk Countries'):
+#     st.dataframe(styled_df, 
+#                  hide_index=True, 
+#                  use_container_width=True)
+
 # Function to generate CSS based on value
 def get_css_color(value):
     if value <= 3.33:
@@ -551,10 +568,12 @@ def get_css_color(value):
     else:
         return "background-color: red"
 
-# Apply CSS to DataFrame
-styled_df = df_selected_year_sorted.style.applymap(lambda x: get_css_color(x) if isinstance(x, float) else "")
+# Function to convert numeric values to progress bars
+def value_to_progress_bar(value):
+    return f'<div style="background-color: lightgray; width: 100%; border-radius: 5px;"><div style="height: 100%; width: {value * 10}%; background-color: green; border-radius: 5px;"></div></div>'
+
+# Apply CSS and convert numeric values to progress bars
+styled_df = df_selected_year_sorted.style.applymap(lambda x: get_css_color(x) if isinstance(x, float) else "").format({col: value_to_progress_bar for col in df_selected_year_sorted.columns if col != "Countries"})
 
 with st.markdown('#### Top Risk Countries'):
-    st.dataframe(styled_df, 
-                 hide_index=True, 
-                 use_container_width=True)
+    st.write(styled_df, unsafe_allow_html=True)
