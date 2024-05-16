@@ -331,6 +331,7 @@ with col[0]:
                         format="%f",
                         min_value=0,
                         max_value=10,
+                        color="lightgreen"
                      )}
                  )
     st.markdown('#### Overall Country Risk over Time')
