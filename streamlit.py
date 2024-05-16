@@ -5,9 +5,9 @@ import pandas as pd
 import altair as alt
 # from mpl_toolkits.basemap import Basemap
 import numpy as np
-import json
-import requests
-import geopandas as gpd
+# import json
+# import requests
+# import geopandas as gpd
 # import matplotlib.pyplot as plt
 # import plotly.express as px
 
