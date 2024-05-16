@@ -296,95 +296,95 @@ with st.expander('About', expanded=True):
 #                  width=None,
 #                  height=None)
 
-# with col[0]:
-#     st.markdown('#### Top Risk Countries')
-
-#     st.dataframe(df_selected_year_sorted,
-#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-#                  hide_index=True,
-#                  width=None,
-#                  column_config={
-#                     "Countries": st.column_config.TextColumn(
-#                         "Countries",
-#                     ),
-#                     "Overall risk factor": st.column_config.ProgressColumn(
-#                         "Overall Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Fiscal risk factor": st.column_config.ProgressColumn(
-#                         "Fiscal Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Financial risk factor": st.column_config.ProgressColumn(
-#                         "Financial Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "External risk factor": st.column_config.ProgressColumn(
-#                         "External Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      )}
-#                  )
-
 with col[0]:
-    st.markdown('#### Top Risk Countries (Year: {})'.format(selected_year))
-
-    def color_mapper(value):
-        if value < 3:
-            return 'green'
-        elif value < 7:
-            return 'yellow'
-        else:
-            return 'red'
-
-    column_config = {
-        "Countries": st.column_config.TextColumn(
-            "Countries",
-        ),
-        "Overall risk factor": st.column_config.ProgressColumn(
-            "Overall Risk",
-            format="%f",
-            min_value=0,
-            max_value=10,
-            # Define a custom progress_bar_color function
-            progress_bar_color=color_mapper(df_selected_year_sorted['Overall risk factor'].iloc[0])
-        ),
-        "Fiscal risk factor": st.column_config.ProgressColumn(
-            "Fiscal Risk",
-            format="%f",
-            min_value=0,
-            max_value=10,
-            progress_bar_color=lambda x: color_mapper(df_selected_year_sorted['Fiscal risk factor'][x])
-        ),
-        "Financial risk factor": st.column_config.ProgressColumn(
-            "Financial Risk",
-            format="%f",
-            min_value=0,
-            max_value=10,
-            progress_bar_color=lambda x: color_mapper(df_selected_year_sorted['Financial risk factor'][x])
-        ),
-        "External risk factor": st.column_config.ProgressColumn(
-            "External Risk",
-            format="%f",
-            min_value=0,
-            max_value=10,
-            progress_bar_color=lambda x: color_mapper(df_selected_year_sorted['External risk factor'][x])
-        ),
-    }
+    st.markdown('#### Top Risk Countries')
 
     st.dataframe(df_selected_year_sorted,
                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
                  hide_index=True,
                  width=None,
-                 column_config=column_config
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     )}
                  )
+
+# with col[0]:
+#     st.markdown('#### Top Risk Countries (Year: {})'.format(selected_year))
+
+#     def color_mapper(value):
+#         if value < 3:
+#             return 'green'
+#         elif value < 7:
+#             return 'yellow'
+#         else:
+#             return 'red'
+
+#     column_config = {
+#         "Countries": st.column_config.TextColumn(
+#             "Countries",
+#         ),
+#         "Overall risk factor": st.column_config.ProgressColumn(
+#             "Overall Risk",
+#             format="%f",
+#             min_value=0,
+#             max_value=10,
+#             # Define a custom progress_bar_color function
+#             progress_bar_color=color_mapper(df_selected_year_sorted['Overall risk factor'].iloc[0])
+#         ),
+#         "Fiscal risk factor": st.column_config.ProgressColumn(
+#             "Fiscal Risk",
+#             format="%f",
+#             min_value=0,
+#             max_value=10,
+#             progress_bar_color=lambda x: color_mapper(df_selected_year_sorted['Fiscal risk factor'][x])
+#         ),
+#         "Financial risk factor": st.column_config.ProgressColumn(
+#             "Financial Risk",
+#             format="%f",
+#             min_value=0,
+#             max_value=10,
+#             progress_bar_color=lambda x: color_mapper(df_selected_year_sorted['Financial risk factor'][x])
+#         ),
+#         "External risk factor": st.column_config.ProgressColumn(
+#             "External Risk",
+#             format="%f",
+#             min_value=0,
+#             max_value=10,
+#             progress_bar_color=lambda x: color_mapper(df_selected_year_sorted['External risk factor'][x])
+#         ),
+#     }
+
+#     st.dataframe(df_selected_year_sorted,
+#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+#                  hide_index=True,
+#                  width=None,
+#                  column_config=column_config
+#                  )
     
     st.markdown('#### Overall Country Risk over Time')
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
