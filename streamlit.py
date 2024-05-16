@@ -409,26 +409,28 @@ with st.expander('About', expanded=True):
 #         st.progress(row['External risk factor'] / 10)
 
 
-def progress_column(val):
-    if val <= 3:
-        color = 'green'
-    else:
-        color = 'red'
-    return f'<div style="background-color: {color}; width: {val*10}%; height: 100%">{val}</div>'
+def color_risk(val):
+    color = 'green' if val <= 3 else 'red'
+    return f'background-color: {color}'
 
-def format_dataframe(df):
-    for column in df.columns[1:]:  # Skip the 'Countries' column
-        df[column] = df[column].apply(progress_column)
-    return df
+def format_risk_column(df, column_name):
+    return df[column_name].apply(lambda x: f'<div style="background-color:{"green" if x <= 3 else "red"}; width: 100%; height: 100%">{x}</div>')
 
-formatted_df = format_dataframe(df_selected_year_sorted)
+# Sample dataframe
+df_selected_year_sorted = pd.DataFrame({
+    'Countries': ['Country A', 'Country B', 'Country C'],
+    'Overall risk factor': [2.5, 4.2, 3.8],
+    'Fiscal risk factor': [1.0, 5.5, 2.3],
+    'Financial risk factor': [3.1, 6.0, 2.8],
+    'External risk factor': [2.7, 3.4, 4.9]
+})
 
-def render_html_table(df):
-    html = df.to_html(escape=False, index=False)
-    return html
+# Apply the custom formatting
+for column in ['Overall risk factor', 'Fiscal risk factor', 'Financial risk factor', 'External risk factor']:
+    df_selected_year_sorted[column] = format_risk_column(df_selected_year_sorted, column)
 
-# Render the HTML table in Streamlit
-html_table = render_html_table(formatted_df)
+# Convert dataframe to HTML
+html_table = df_selected_year_sorted.to_html(escape=False, index=False)
 
 with col[0]:
     st.markdown('#### Top Risk Countries')
