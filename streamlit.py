@@ -307,53 +307,53 @@ with st.expander('About', expanded=True):
 #                  width=None,
 #                  height=None)
 
-# with col[0]:
-#     st.markdown('#### Top Risk Countries')
-
-#     st.dataframe(df_selected_year_sorted,
-#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-#                  hide_index=True,
-#                  width=None,
-#                  column_config={
-#                     "Countries": st.column_config.TextColumn(
-#                         "Countries",
-#                     ),
-#                     "Overall risk factor": st.column_config.ProgressColumn(
-#                         "Overall Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Fiscal risk factor": st.column_config.ProgressColumn(
-#                         "Fiscal Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Financial risk factor": st.column_config.ProgressColumn(
-#                         "Financial Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "External risk factor": st.column_config.ProgressColumn(
-#                         "External Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      )}
-#                  )
-    
 with col[0]:
     st.markdown('#### Top Risk Countries')
 
-    for index, row in df_selected_year_sorted.iterrows():
-        st.write(row['Countries'])
-        st.write('Overall risk factor:')
-        st.progress(row['Overall risk factor'] / 10)
-        st.write('Fiscal risk factor:')
-        st.progress(row['Fiscal risk factor'] / 10)
-        st.write('Financial risk factor:')
-        st.progress(row['Financial risk factor'] / 10)
-        st.write('External risk factor:')
-        st.progress(row['External risk factor'] / 10)
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+                 hide_index=True,
+                 width=None,
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     )}
+                 )
+    
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
+
+#     for index, row in df_selected_year_sorted.iterrows():
+#         st.write(row['Countries'])
+#         st.write('Overall risk factor:')
+#         st.progress(row['Overall risk factor'] / 10)
+#         st.write('Fiscal risk factor:')
+#         st.progress(row['Fiscal risk factor'] / 10)
+#         st.write('Financial risk factor:')
+#         st.progress(row['Financial risk factor'] / 10)
+#         st.write('External risk factor:')
+#         st.progress(row['External risk factor'] / 10)
