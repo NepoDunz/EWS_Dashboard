@@ -293,18 +293,54 @@ with st.expander('About', expanded=True):
 #                  )
 
 
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
+
+#     # Reshape the DataFrame to have risk factors as rows
+#     df_melted = df_selected_year_sorted.melt(id_vars=["Countries"], 
+#                                              value_vars=["Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"],
+#                                              var_name="Risk Factor", 
+#                                              value_name="Risk Score")
+    
+#     # Display the DataFrame
+#     st.dataframe(df_melted, 
+#                  width=None,
+#                  height=None)
+
 with col[0]:
     st.markdown('#### Top Risk Countries')
 
-    # Reshape the DataFrame to have risk factors as rows
-    df_melted = df_selected_year_sorted.melt(id_vars=["Countries"], 
-                                             value_vars=["Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"],
-                                             var_name="Risk Factor", 
-                                             value_name="Risk Score")
-    
-    # Display the DataFrame
-    st.dataframe(df_melted, 
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+                 hide_index=True,
                  width=None,
-                 height=None)
-    
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=max(df_selected_year_sorted['Overall risk factor']),
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=max(df_selected_year_sorted['Fiscal risk factor']),
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=max(df_selected_year_sorted['Financial risk factor']),
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=max(df_selected_year_sorted['External risk factor']),
+                     )}
+                 )
     
