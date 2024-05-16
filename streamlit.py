@@ -190,7 +190,7 @@ col = st.columns((9, 3), gap='medium')
 
 
 with col[1]:
-    st.markdown('#### Top vhanges in country risk')
+    st.markdown('#### Top changes in country risk')
 
     df_risk_difference_sorted = calculate_population_difference(df_reshaped, selected_year)
 
@@ -226,13 +226,13 @@ with col[1]:
         # % of States with population difference > 50000
         country_risk_greater = round((len(df_greater_1)/df_risk_difference_sorted.Countries.nunique())*100)
         country_risk_less = round((len(df_less_1)/df_risk_difference_sorted.Countries.nunique())*100)
-        donut_chart_greater = make_donut(country_risk_greater, 'Risk increase', 'red')
-        donut_chart_less = make_donut(country_risk_less, 'Risk decrease', 'green')
+        donut_chart_greater = make_donut(country_risk_greater, 'Risk increase', 'green')
+        donut_chart_less = make_donut(country_risk_less, 'Risk decrease', 'red')
     else:
         country_risk_greater = 0
         country_risk_less = 0
-        donut_chart_greater = make_donut(country_risk_greater, 'Risk increase', 'green')
-        donut_chart_less = make_donut(country_risk_less, 'Risk decrease', 'red')
+        donut_chart_greater = make_donut(country_risk_greater, 'Risk increase', 'red')
+        donut_chart_less = make_donut(country_risk_less, 'Risk decrease', 'green')
 
     risk_col = st.columns((0.2, 1, 0.2))
     with risk_col[1]:
