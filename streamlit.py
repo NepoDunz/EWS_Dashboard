@@ -296,6 +296,7 @@ with st.expander('About', expanded=True):
 #                  width=None,
 #                  height=None)
 
+st.column_config.LineChartColumn("Trend", color="green")
 with col[0]:
     st.markdown('#### Top Risk Countries')
 
