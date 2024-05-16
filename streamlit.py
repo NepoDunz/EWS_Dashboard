@@ -141,8 +141,8 @@ with col[0]:
     if selected_year > 2010:
         # Filter states with population difference > 50000
         # df_greater_50000 = df_population_difference_sorted[df_population_difference_sorted.population_difference_absolute > 50000]
-        df_greater_1 = df_risk_difference_sorted[df_risk_difference_sorted.risk_difference > 1]
-        df_less_1 = df_risk_difference_sorted[df_risk_difference_sorted.risk_difference < -1]
+        df_greater_1 = df_risk_difference_sorted[df_risk_difference_sorted.risk_difference > 0]
+        df_less_1 = df_risk_difference_sorted[df_risk_difference_sorted.risk_difference < 0]
         
         # % of States with population difference > 50000
         country_risk_greater = round((len(df_greater_1)/df_risk_difference_sorted.Countries.nunique())*100)
@@ -194,7 +194,7 @@ with col[2]:
     
     with st.expander('About', expanded=True):
         st.write('''
-            - Data: [U.S. Census Bureau](<https://www.census.gov/data/datasets/time-series/demo/popest/2010s-state-total.html>).
-            - :orange[**Gains/Losses**]: states with high inbound/ outbound migration for selected year
-            - :orange[**States Migration**]: percentage of states with annual inbound/ outbound migration > 50,000
+            - Data: EWS
+            - :orange[**Changes in country risk**]: difference in overall risk since last update
+            - :orange[**Country risk**]: share of countries with increase/decrease in country risk
             ''')
