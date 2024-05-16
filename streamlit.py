@@ -372,5 +372,5 @@ with col[0]:
         overall_risk_factor = row["Overall risk factor"]
         color = 'green' if overall_risk_factor < 3 else 'yellow' if overall_risk_factor <= 7 else 'red'
         st.progress(overall_risk_factor / 10, 
-                    {'background': color}, 
-                    f'{overall_risk_factor:.1f}')
+                    f'{overall_risk_factor:.1f}', 
+                    {'background': color})
