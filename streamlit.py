@@ -443,7 +443,14 @@ with st.expander('About', expanded=True):
 #     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
 #     st.altair_chart(heatmap, use_container_width=True)
 
-
+# Sample dataframe
+df_selected_year_sorted = pd.DataFrame({
+    'Countries': ['Country A', 'Country B', 'Country C'],
+    'Overall risk factor': [2.5, 4.2, 3.8],
+    'Fiscal risk factor': [1.0, 5.5, 2.3],
+    'Financial risk factor': [3.1, 6.0, 2.8],
+    'External risk factor': [2.7, 3.4, 4.9]
+})
 def progress_html(value, min_value=0, max_value=10):
     percentage = (value - min_value) / (max_value - min_value) * 100
     color = 'green' if value <= 3 else 'red'
