@@ -297,45 +297,45 @@ with st.expander('About', expanded=True):
 #                  height=None)
 
 
-with col[0]:
-    st.markdown('#### Top Risk Countries')
+# with col[0]:
+#     st.markdown('#### Top Risk Countries')
     
-    st.dataframe(df_selected_year_sorted,
-                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-                 hide_index=True,
-                 use_container_width=True,
-                 column_config={
-                    "Countries": st.column_config.TextColumn(
-                        "Countries",
-                    ),
-                    "Overall risk factor": st.column_config.ProgressColumn(
-                        "Overall Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                     ),
-                    "Fiscal risk factor": st.column_config.ProgressColumn(
-                        "Fiscal Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                     ),
-                    "Financial risk factor": st.column_config.ProgressColumn(
-                        "Financial Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                     ),
-                    "External risk factor": st.column_config.ProgressColumn(
-                        "External Risk",
-                        format="%f",
-                        min_value=0,
-                        max_value=10,
-                     )}
-                 )
-    st.markdown('#### Overall Country Risk over Time')
-    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-    st.altair_chart(heatmap, use_container_width=True)
+#     st.dataframe(df_selected_year_sorted,
+#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+#                  hide_index=True,
+#                  use_container_width=True,
+#                  column_config={
+#                     "Countries": st.column_config.TextColumn(
+#                         "Countries",
+#                     ),
+#                     "Overall risk factor": st.column_config.ProgressColumn(
+#                         "Overall Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                      ),
+#                     "Fiscal risk factor": st.column_config.ProgressColumn(
+#                         "Fiscal Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                      ),
+#                     "Financial risk factor": st.column_config.ProgressColumn(
+#                         "Financial Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                      ),
+#                     "External risk factor": st.column_config.ProgressColumn(
+#                         "External Risk",
+#                         format="%f",
+#                         min_value=0,
+#                         max_value=10,
+#                      )}
+#                  )
+#     st.markdown('#### Overall Country Risk over Time')
+#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+#     st.altair_chart(heatmap, use_container_width=True)
     
 # with col[0]:
 #     st.markdown('#### Top Risk Countries (Year: {})'.format(selected_year))
@@ -486,3 +486,40 @@ with col[0]:
 #         heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
 #         st.altair_chart(heatmap, use_container_width=True)
 
+
+with col[0]:
+    st.markdown('#### Top Risk Countries')
+    
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+                 hide_index=True,
+                 use_container_width=True,
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     )}
+                 )
