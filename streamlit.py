@@ -46,9 +46,9 @@ data = {
 }
 
 # Generate random values for the 'risk factor' column
-data['Fiscal risk factor'] = np.round(random.uniform(0, 10, size=len(data['Countries'])),1)
-data['Financial risk factor'] = np.round(random.uniform(0, 10, size=len(data['Countries'])),1)
-data['External risk factor'] = np.round(random.uniform(0, 10, size=len(data['Countries'])),1)
+data['Fiscal risk factor'] = np.round(np.random.uniform(0, 10, size=len(data['Countries'])),1)
+data['Financial risk factor'] = np.round(np.random.uniform(0, 10, size=len(data['Countries'])),1)
+data['External risk factor'] = np.round(np.random.uniform(0, 10, size=len(data['Countries'])),1)
 df_reshaped = pd.DataFrame(data)
 
 with st.sidebar:
