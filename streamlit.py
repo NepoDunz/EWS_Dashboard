@@ -307,69 +307,43 @@ with st.expander('About', expanded=True):
 #                  width=None,
 #                  height=None)
 
-# with col[0]:
-#     st.markdown('#### Top Risk Countries')
-
-#     st.dataframe(df_selected_year_sorted,
-#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-#                  hide_index=True,
-#                  width=None,
-#                  column_config={
-#                     "Countries": st.column_config.TextColumn(
-#                         "Countries",
-#                     ),
-#                     "Overall risk factor": st.column_config.ProgressColumn(
-#                         "Overall Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Fiscal risk factor": st.column_config.ProgressColumn(
-#                         "Fiscal Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Financial risk factor": st.column_config.ProgressColumn(
-#                         "Financial Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "External risk factor": st.column_config.ProgressColumn(
-#                         "External Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      )}
-#                  )
-
 with col[0]:
     st.markdown('#### Top Risk Countries')
 
-    for index, row in df_selected_year_sorted.iterrows():
-        st.write(row['Countries'])
-        st.write('Overall risk factor:')
-        overall_style = f'background-color: {"red" if row["Overall risk factor"] > 7 else "yellow" if 3 <= row["Overall risk factor"] <= 7 else "green"}'
-        st.write(f'<div style="width: 100%; height: 25px; border-radius: 5px; overflow: hidden;"><div style="{overall_style}; width: {row["Overall risk factor"] * 10}%; height: 100%;"></div></div>', unsafe_allow_html=True)
-        
-        st.write('<div style="display: flex; justify-content: space-between;">')
-        st.write('<div>Fiscal:</div>')
-        fiscal_style = f'color: {"red" if row["Fiscal risk factor"] > 7 else "yellow" if 3 <= row["Fiscal risk factor"] <= 7 else "green"}'
-        st.write(f'<div style="{fiscal_style};">{row["Fiscal risk factor"]}</div>')
-        st.write('</div>')
-        
-        st.write('<div style="display: flex; justify-content: space-between;">')
-        st.write('<div>Financial:</div>')
-        financial_style = f'color: {"red" if row["Financial risk factor"] > 7 else "yellow" if 3 <= row["Financial risk factor"] <= 7 else "green"}'
-        st.write(f'<div style="{financial_style};">{row["Financial risk factor"]}</div>')
-        st.write('</div>')
-        
-        st.write('<div style="display: flex; justify-content: space-between;">')
-        st.write('<div>External:</div>')
-        external_style = f'color: {"red" if row["External risk factor"] > 7 else "yellow" if 3 <= row["External risk factor"] <= 7 else "green"}'
-        st.write(f'<div style="{external_style};">{row["External risk factor"]}</div>')
-        st.write('</div>')
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+                 hide_index=True,
+                 width=None,
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     )}
+                 )
+
 
     st.markdown('#### Overall Country Risk over Time')
     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
