@@ -124,10 +124,10 @@ def format_number(num):
         return f'{round(num / 1000000, 1)} M'
     return f'{num // 1000} K'
 
-col = st.columns((1.5, 4, 2.5), gap='medium')
+col = st.columns((2.5, 2, 3), gap='medium')
 
 
-with col[0]:
+with col[1]:
     st.markdown('#### Changes in country risk')
 
     df_risk_difference_sorted = calculate_population_difference(df_reshaped, selected_year)
@@ -180,7 +180,7 @@ with col[0]:
         st.altair_chart(donut_chart_less)
 
 
-with col[1]:
+with col[2]:
     st.markdown('#### Default risk')
     
 #     choropleth = make_choropleth(df_selected_year, 'country_code', 'risk factor', selected_color_theme)
@@ -190,7 +190,7 @@ with col[1]:
     st.altair_chart(heatmap, use_container_width=True)
 
 
-with col[2]:
+with col[0]:
     st.markdown('#### Top Risk Countries')
 
     st.dataframe(df_selected_year_sorted,
