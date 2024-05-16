@@ -1,5 +1,4 @@
-pip install git+https://github.com/geopandas/geopandas.git
-pip install pandas shapely fiona pyproj matplotlib
+
 
 import streamlit as st
 import pandas as pd
