@@ -412,7 +412,13 @@ with st.expander('About', expanded=True):
 def progress_html(value, min_value=0, max_value=10):
     percentage = (value - min_value) / (max_value - min_value) * 100
     color = 'green' if value <= 3 else 'red'
-    return 
+    return f'''
+        <div style="background-color: lightgrey; width: 100%; border-radius: 5px;">
+            <div style="background-color: {color}; width: {percentage}%; height: 100%; border-radius: 5px; text-align: right; padding-right: 5px; color: white;">
+                {value}
+            </div>
+        </div>
+    '''
 
 def format_dataframe(df):
     for column in df.columns[1:]:  # Skip the 'Countries' column
