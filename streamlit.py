@@ -297,45 +297,45 @@ with st.expander('About', expanded=True):
 #                  height=None)
 
 
-# with col[0]:
-#     st.markdown('#### Top Risk Countries')
+with col[0]:
+    st.markdown('#### Top Risk Countries')
     
-#     st.dataframe(df_selected_year_sorted,
-#                  column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
-#                  hide_index=True,
-#                  use_container_width=True,
-#                  column_config={
-#                     "Countries": st.column_config.TextColumn(
-#                         "Countries",
-#                     ),
-#                     "Overall risk factor": st.column_config.ProgressColumn(
-#                         "Overall Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Fiscal risk factor": st.column_config.ProgressColumn(
-#                         "Fiscal Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "Financial risk factor": st.column_config.ProgressColumn(
-#                         "Financial Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      ),
-#                     "External risk factor": st.column_config.ProgressColumn(
-#                         "External Risk",
-#                         format="%f",
-#                         min_value=0,
-#                         max_value=10,
-#                      )}
-#                  )
-#     st.markdown('#### Overall Country Risk over Time')
-#     heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
-#     st.altair_chart(heatmap, use_container_width=True)
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("Countries", "Overall risk factor", "Fiscal risk factor", "Financial risk factor", "External risk factor"),
+                 hide_index=True,
+                 use_container_width=True,
+                 column_config={
+                    "Countries": st.column_config.TextColumn(
+                        "Countries",
+                    ),
+                    "Overall risk factor": st.column_config.ProgressColumn(
+                        "Overall Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Fiscal risk factor": st.column_config.ProgressColumn(
+                        "Fiscal Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "Financial risk factor": st.column_config.ProgressColumn(
+                        "Financial Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     ),
+                    "External risk factor": st.column_config.ProgressColumn(
+                        "External Risk",
+                        format="%f",
+                        min_value=0,
+                        max_value=10,
+                     )}
+                 )
+    st.markdown('#### Overall Country Risk over Time')
+    heatmap = make_heatmap(df_reshaped, 'year', 'country_code', 'Overall risk factor', selected_color_theme)
+    st.altair_chart(heatmap, use_container_width=True)
     
 # with col[0]:
 #     st.markdown('#### Top Risk Countries (Year: {})'.format(selected_year))
@@ -560,21 +560,21 @@ with st.expander('About', expanded=True):
 #                  use_container_width=True)
 
 
-# Function to convert numeric values to progress bars
-def value_to_progress_bar(value):
-    max_value = 10  # Assuming maximum value is 10
-    progress = int((value / max_value) * 100)
-    return f'<div style="background-color: lightgray; width: 100px; border-radius: 5px;"><div style="height: 20px; width: {progress}%; background-color: green; border-radius: 5px;"></div></div>'
+# # Function to convert numeric values to progress bars
+# def value_to_progress_bar(value):
+#     max_value = 10  # Assuming maximum value is 10
+#     progress = int((value / max_value) * 100)
+#     return f'<div style="background-color: lightgray; width: 100px; border-radius: 5px;"><div style="height: 20px; width: {progress}%; background-color: green; border-radius: 5px;"></div></div>'
 
-# Process DataFrame to replace numeric values with progress bars
-progress_df = df_selected_year_sorted.copy()
-for col in progress_df.columns:
-    if col != "Countries":
-        progress_df[col] = progress_df[col].apply(value_to_progress_bar)
+# # Process DataFrame to replace numeric values with progress bars
+# progress_df = df_selected_year_sorted.copy()
+# for col in progress_df.columns:
+#     if col != "Countries":
+#         progress_df[col] = progress_df[col].apply(value_to_progress_bar)
 
-# Display the processed DataFrame
-with st.markdown('#### Top Risk Countries'):
-    st.dataframe(progress_df, 
-                 index=False,
-                 escape_html=False,  # To render HTML
-                 unsafe_allow_html=True)  # To allow HTML rendering
+# # Display the processed DataFrame
+# with st.markdown('#### Top Risk Countries'):
+#     st.dataframe(progress_df, 
+#                  index=False,
+#                  escape_html=False,  # To render HTML
+#                  unsafe_allow_html=True)  # To allow HTML rendering
