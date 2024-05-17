@@ -49,13 +49,13 @@ with st.sidebar:
     df_selected_year = df_reshaped[df_reshaped.year == selected_year]
     df_selected_year_sorted = df_selected_year.sort_values(by="Overall risk factor", ascending=False)
 
-    color_theme_list = ['reds']
-    selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
+    # color_theme_list = ['reds']
+    # selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
     risk_indicator_list = ['Overal risk indicator', 'Fiscal risk indicator', 'Financial risk indicator','External risk indicator']
     selected_risk_indicator = st.selectbox('Select a risk indicator', risk_indicator_list)
     
 
-
+selected_color_theme = 'Reds'
 # def make_choropleth(input_df, input_id, input_column, input_color_theme):
 #     choropleth = px.choropleth(input_df, locations=input_id, color=input_column, locationmode="ISO-3",
 #                                color_continuous_scale=input_color_theme,
