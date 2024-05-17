@@ -55,7 +55,7 @@ with st.sidebar:
     selected_risk_indicator = st.selectbox('Select a risk indicator', risk_indicator_list)
     
 
-selected_color_theme = 'Reds'
+selected_color_theme = 'reds'
 # def make_choropleth(input_df, input_id, input_column, input_color_theme):
 #     choropleth = px.choropleth(input_df, locations=input_id, color=input_column, locationmode="ISO-3",
 #                                color_continuous_scale=input_color_theme,
